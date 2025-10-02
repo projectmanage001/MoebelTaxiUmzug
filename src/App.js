@@ -37,11 +37,23 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="hero" id="hero">
+    <section
+      className="hero"
+      id="hero"
+      style={{
+        backgroundImage: `url("/truck-bg.jpg")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "100vh",
+        position: "relative"
+      }}
+    >
       <div className="hero-overlay">
         <h1>MöbelTaxi Umzug</h1>
         <p>Ihr Logistik- und Umzugspartner</p>
-        <a href="#kontakt" className="cta-button">Jetzt Kontakt Aufnehmen</a>
+        <a href="#kontakt" className="cta-button">
+          Jetzt Kontakt Aufnehmen
+        </a>
         <p className="phone-display">Telefon: +49 111 111</p>
       </div>
     </section>
@@ -88,16 +100,32 @@ function FAQ() {
       <h1 className="faq-heading">Häufig gestellte Fragen</h1>
       <div className="faq-item fade-in">
         <h2>1. Was für Transportdienstleistungen bietet Ihr Unternehmen an?</h2>
-        <p>MöbelTaxi bietet eine Vielzahl von Transportdienstleistungen in Berlin an, einschließlich Möbeltransporte, Büroumzüge, Transport und Entsorgung von Sperrgut.</p>
-        <p><strong>Was kostet ein Möbeltransport mit MöbelTaxi in Berlin?</strong><br/>Die Kosten werden individuell pro Auftrag berechnet. Nach Ihrer Anfrage erhalten Sie umgehend ein individuelles Angebot.</p>
+        <p>
+          MöbelTaxi bietet eine Vielzahl von Transportdienstleistungen in Berlin
+          an, einschließlich Möbeltransporte, Büroumzüge, Transport und
+          Entsorgung von Sperrgut.
+        </p>
+        <p>
+          <strong>Was kostet ein Möbeltransport mit MöbelTaxi in Berlin?</strong>
+          <br />
+          Die Kosten werden individuell pro Auftrag berechnet. Nach Ihrer Anfrage
+          erhalten Sie umgehend ein individuelles Angebot.
+        </p>
       </div>
       <div className="faq-item fade-in">
         <h2>2. Wie wird der Transportpreis berechnet?</h2>
-        <p>Der Preis hängt von verschiedenen Faktoren ab: Entfernung, Menge und Größe der Möbel sowie eventuellen Zusatzleistungen wie Verpackung oder Montage.</p>
+        <p>
+          Der Preis hängt von verschiedenen Faktoren ab: Entfernung, Menge und
+          Größe der Möbel sowie eventuellen Zusatzleistungen wie Verpackung oder
+          Montage.
+        </p>
       </div>
       <div className="faq-item fade-in">
         <h2>3. Wie kann ich einen Möbeltransport-Termin reservieren?</h2>
-        <p>Sie können Ihren Möbeltransport ganz einfach über unsere Website, per Telefon oder per E-Mail buchen.</p>
+        <p>
+          Sie können Ihren Möbeltransport ganz einfach über unsere Website, per
+          Telefon oder per E-Mail buchen.
+        </p>
       </div>
     </section>
   );
@@ -110,25 +138,72 @@ function Blog() {
       <div className="blog-row">
         <img src="/image11.png" className="blog-img" alt="Privatumzug" />
         <div className="blog-text">
-          <h2 className="blog-title">👉 Privatumzüge in Deutschland: Stressfrei, günstig und professionell umziehen</h2>
-          <p>Ein Wohnungswechsel ist oft mit Stress und viel Organisation verbunden. Mit einem professionellen Umzugsunternehmen wird der Umzug jedoch deutlich einfacher und sicherer. Bei einem Privatumzug stehen vor allem die sorgfältige Verpackung, pünktliche Lieferung und ein zuverlässiger Versicherungsschutz im Vordergrund. Ob innerhalb einer Stadt oder deutschlandweit – unsere erfahrenen Teams sorgen dafür, dass Ihr Umzug reibungslos und stressfrei verläuft. Vertrauen Sie auf unsere Expertise und genießen Sie einen entspannten Neuanfang.</p>
-          <p>#Privatumzug Deutschland, Umzug stressfrei, günstige Umzugsfirma, professioneller Umzug</p>
+          <h2 className="blog-title">
+            👉 Privatumzüge in Deutschland: Stressfrei, günstig und professionell
+            umziehen
+          </h2>
+          <p>
+            Ein Wohnungswechsel ist oft mit Stress und viel Organisation
+            verbunden. Mit einem professionellen Umzugsunternehmen wird der
+            Umzug jedoch deutlich einfacher und sicherer. Bei einem Privatumzug
+            stehen vor allem die sorgfältige Verpackung, pünktliche Lieferung
+            und ein zuverlässiger Versicherungsschutz im Vordergrund. Ob
+            innerhalb einer Stadt oder deutschlandweit – unsere erfahrenen Teams
+            sorgen dafür, dass Ihr Umzug reibungslos und stressfrei verläuft.
+            Vertrauen Sie auf unsere Expertise und genießen Sie einen entspannten
+            Neuanfang.
+          </p>
+          <p>
+            #Privatumzug Deutschland, Umzug stressfrei, günstige Umzugsfirma,
+            professioneller Umzug
+          </p>
         </div>
       </div>
       <div className="blog-row reverse">
         <img src="/image22.png" className="blog-img" alt="Firmenumzug" />
         <div className="blog-text">
-          <h2 className="blog-title">👉 Firmenumzüge leicht gemacht: Effizient und ohne Arbeitsausfall umziehen</h2>
-          <p>Ein Firmenumzug bedeutet mehr als nur Möbel zu transportieren – er beeinflusst den gesamten Geschäftsablauf. Deshalb ist eine präzise Planung entscheidend, damit der Betrieb ohne Unterbrechung weiterläuft. Büroeinrichtungen, Computer, sensible Daten und technische Geräte müssen mit besonderer Sorgfalt transportiert werden. Wir bieten Unternehmen maßgeschneiderte Lösungen, um einen schnellen, sicheren und effizienten Umzug zu garantieren. Mit unserem professionellen Team minimieren Sie Ausfallzeiten und können sich voll auf Ihr Geschäft konzentrieren.</p>
-          <p>#Firmenumzug Deutschland, Büro umziehen, Umzugsservice für Unternehmen, professioneller Büroumzug</p>
+          <h2 className="blog-title">
+            👉 Firmenumzüge leicht gemacht: Effizient und ohne Arbeitsausfall
+            umziehen
+          </h2>
+          <p>
+            Ein Firmenumzug bedeutet mehr als nur Möbel zu transportieren – er
+            beeinflusst den gesamten Geschäftsablauf. Deshalb ist eine präzise
+            Planung entscheidend, damit der Betrieb ohne Unterbrechung
+            weiterläuft. Büroeinrichtungen, Computer, sensible Daten und
+            technische Geräte müssen mit besonderer Sorgfalt transportiert
+            werden. Wir bieten Unternehmen maßgeschneiderte Lösungen, um einen
+            schnellen, sicheren und effizienten Umzug zu garantieren. Mit unserem
+            professionellen Team minimieren Sie Ausfallzeiten und können sich
+            voll auf Ihr Geschäft konzentrieren.
+          </p>
+          <p>
+            #Firmenumzug Deutschland, Büro umziehen, Umzugsservice für
+            Unternehmen, professioneller Büroumzug
+          </p>
         </div>
       </div>
       <div className="blog-row">
         <img src="/image33.png" className="blog-img" alt="Express Transporte" />
         <div className="blog-text">
-          <h2 className="blog-title">👉 Express-Transporte in Deutschland: Schnell, sicher und zuverlässig liefern</h2>
-          <p>Manchmal zählt jede Minute – ob wichtige Dokumente, Messeausstattung oder dringende Warenlieferungen. In solchen Fällen sind Express-Transporte die beste Lösung. Unser Service garantiert schnelle, flexible und sichere Lieferungen in ganz Deutschland. Dank moderner Fahrzeuge und einem 24/7-Kundenservice stellen wir sicher, dass Ihre Sendung pünktlich und unversehrt ankommt. Wenn es wirklich eilig ist, können Sie sich auf unsere Erfahrung und Zuverlässigkeit verlassen.</p>
-           <p>#Express Transport Deutschland, schnelle Lieferung, zuverlässiger Transport, 24h Express-Umzug</p>
+          <h2 className="blog-title">
+            👉 Express-Transporte in Deutschland: Schnell, sicher und zuverlässig
+            liefern
+          </h2>
+          <p>
+            Manchmal zählt jede Minute – ob wichtige Dokumente, Messeausstattung
+            oder dringende Warenlieferungen. In solchen Fällen sind
+            Express-Transporte die beste Lösung. Unser Service garantiert
+            schnelle, flexible und sichere Lieferungen in ganz Deutschland. Dank
+            moderner Fahrzeuge und einem 24/7-Kundenservice stellen wir sicher,
+            dass Ihre Sendung pünktlich und unversehrt ankommt. Wenn es wirklich
+            eilig ist, können Sie sich auf unsere Erfahrung und Zuverlässigkeit
+            verlassen.
+          </p>
+          <p>
+            #Express Transport Deutschland, schnelle Lieferung, zuverlässiger
+            Transport, 24h Express-Umzug
+          </p>
         </div>
       </div>
     </section>
@@ -143,7 +218,9 @@ function WhyUs() {
         <div className="service-card fade-in">✅ Schnell, zuverlässig & preiswert</div>
         <div className="service-card fade-in">✅ Flexible Termine – auch kurzfristig möglich</div>
         <div className="service-card fade-in">✅ Freundlicher Service & tatkräftiges Team</div>
-        <div className="service-card fade-in">✅ Transporte mit eigenen Fahrzeugen in ganz Berlin</div>
+        <div className="service-card fade-in">
+          ✅ Transporte mit eigenen Fahrzeugen in ganz Berlin
+        </div>
       </div>
     </section>
   );
@@ -154,10 +231,29 @@ function Contact() {
     <section className="section" id="kontakt">
       <h1>Kontakt & Standort</h1>
       <div className="contact-info">
-        <p><strong>📍 Adresse:</strong> Zeppelinstraße 75, 13583 Berlin</p>
-        <p><strong>📧 E-Mail:</strong> <a href="mailto:moebeltaxiumzug@gmail.com">moebeltaxiumzug@gmail.com</a></p>
-        <p><strong>📞 Telefon:</strong> <a href="tel:+49111111">+49 111 111</a></p>
-        <p><strong>📷 Instagram:</strong> <a href="https://instagram.com/mobeltaxiumzug" target="_blank" rel="noreferrer">@mobeltaxiumzug</a></p>
+        <p>
+          <strong>📍 Adresse:</strong> Zeppelinstraße 75, 13583 Berlin
+        </p>
+        <p>
+          <strong>📧 E-Mail:</strong>{" "}
+          <a href="mailto:moebeltaxiumzug@gmail.com">
+            moebeltaxiumzug@gmail.com
+          </a>
+        </p>
+        <p>
+          <strong>📞 Telefon:</strong>{" "}
+          <a href="tel:+49111111">+49 111 111</a>
+        </p>
+        <p>
+          <strong>📷 Instagram:</strong>{" "}
+          <a
+            href="https://instagram.com/mobeltaxiumzug"
+            target="_blank"
+            rel="noreferrer"
+          >
+            @mobeltaxiumzug
+          </a>
+        </p>
       </div>
       <div style={{ height: "2rem" }}></div>
       <div className="map-container">
