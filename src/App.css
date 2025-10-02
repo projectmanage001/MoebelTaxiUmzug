@@ -51,7 +51,7 @@ body {
 /* Hero Section (Full Screen Background) */
 .hero {
   height: 100vh;
-  background-image: url("/Users/ens.gky/logistik-webseite/src/truck-bg.jpg"); /* 👈 Bu görseli public klasörüne koymalısın */
+  background-image: url("/truck-bg.jpg"); /* 👈 doğru kullanım (public/ klasörü) */
   background-size: cover;
   background-position: center;
   position: relative;
