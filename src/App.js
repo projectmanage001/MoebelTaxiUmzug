@@ -1,15 +1,53 @@
-// App.js
-import React from "react";
+// Updated App.js with blog detail navigation + responsive navbar (hamburger menu)
+import React, { useState } from "react";
 import "./App.css";
 
+const blogPosts = [
+  {
+    id: 1,
+    title: "👉 Privatumzüge in Deutschland: Stressfrei, günstig und professionell umziehen",
+    image: "/image11.png",
+    content: `Ein Wohnungswechsel ist oft mit Stress und viel Organisation verbunden. Mit einem professionellen Umzugsunternehmen wird der Umzug jedoch deutlich einfacher und sicherer. Bei einem Privatumzug stehen vor allem die sorgfältige Verpackung, pünktliche Lieferung und ein zuverlässiger Versicherungsschutz im Vordergrund. Ob innerhalb einer Stadt oder deutschlandweit – unsere erfahrenen Teams sorgen dafür, dass Ihr Umzug reibungslos und stressfrei verläuft. Vertrauen Sie auf unsere Expertise und genießen Sie einen entspannten Neuanfang.`,
+    hashtags: "#Privatumzug Deutschland, Umzug stressfrei, günstige Umzugsfirma, professioneller Umzug"
+  },
+  {
+    id: 2,
+    title: "👉 Firmenumzüge leicht gemacht: Effizient und ohne Arbeitsausfall umziehen",
+    image: "/image22.png",
+    content: `Ein Firmenumzug bedeutet mehr als nur Möbel zu transportieren – er beeinflusst den gesamten Geschäftsablauf. Deshalb ist eine präzise Planung entscheidend, damit der Betrieb ohne Unterbrechung weiterläuft. Büroeinrichtungen, Computer, sensible Daten und technische Geräte müssen mit besonderer Sorgfalt transportiert werden. Wir bieten Unternehmen maßgeschneiderte Lösungen, um einen schnellen, sicheren und effizienten Umzug zu garantieren.`,
+    hashtags: "#Firmenumzug Deutschland, Büro umziehen, Umzugsservice für Unternehmen, professioneller Büroumzug"
+  },
+  {
+    id: 3,
+    title: "👉 Express-Transporte in Deutschland: Schnell, sicher und zuverlässig liefern",
+    image: "/image33.png",
+    content: `Manchmal zählt jede Minute – ob wichtige Dokumente, Messeausstattung oder dringende Warenlieferungen. In solchen Fällen sind Express-Transporte die beste Lösung. Unser Service garantiert schnelle, flexible und sichere Lieferungen in ganz Deutschland.`,
+    hashtags: "#Express Transport Deutschland, schnelle Lieferung, zuverlässiger Transport, 24h Express-Umzug"
+  }
+];
+
 function App() {
+  const [selectedBlog, setSelectedBlog] = useState(null);
+  const [navOpen, setNavOpen] = useState(false);
+
+  const handleBlogClick = (id) => {
+    const blog = blogPosts.find((post) => post.id === id);
+    setSelectedBlog(blog);
+  };
+
+  const handleBack = () => setSelectedBlog(null);
+
   return (
     <div className="App">
-      <Header />
+      <Header navOpen={navOpen} setNavOpen={setNavOpen} />
       <Hero />
       <Services />
       <FAQ />
-      <Blog />
+      {selectedBlog ? (
+        <BlogDetail blog={selectedBlog} onBack={handleBack} />
+      ) : (
+        <Blog blogPosts={blogPosts} onBlogClick={handleBlogClick} />
+      )}
       <WhyUs />
       <Contact />
       <Footer />
@@ -17,21 +55,59 @@ function App() {
   );
 }
 
-function Header() {
+function Header({ navOpen, setNavOpen }) {
   return (
     <header className="header">
       <div className="logo-with-image">
         <img src="/logo.png" alt="MöbelTaxi Logo" className="logo-img" />
-        <span className="logo-text">MöbelTaxi Umzug Berlin</span>
+        <span className="logo-text">Möbel Taxi & Umzug Berlin</span>
       </div>
-      <nav className="nav">
-        <a href="#hero">Start</a>
+      <div className="hamburger" onClick={() => setNavOpen(!navOpen)}>
+        ☰
+      </div>
+      <nav className={`nav ${navOpen ? "open" : ""}`}>
+        <a href="#hero">Home</a>
         <a href="#services">Dienstleistungen</a>
         <a href="#faq">FAQ</a>
         <a href="#blog">Blog</a>
         <a href="#kontakt">Kontakt</a>
       </nav>
     </header>
+  );
+}
+
+function Blog({ blogPosts, onBlogClick }) {
+  return (
+    <section className="section blog-section" id="blog">
+      <h1 className="faq-heading">Blog & Neuigkeiten</h1>
+      <div className="blog-grid">
+        {blogPosts.map((post) => (
+          <div
+            key={post.id}
+            className="blog-preview-card fade-in"
+            onClick={() => onBlogClick(post.id)}
+          >
+            <img src={post.image} alt={post.title} className="blog-preview-img" />
+            <h2 className="blog-title">{post.title}</h2>
+            <p className="blog-readmore">Weiterlesen →</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function BlogDetail({ blog, onBack }) {
+  return (
+    <section className="section blog-detail-section">
+      <button className="back-button" onClick={onBack}>
+        ← Zurück zur Übersicht
+      </button>
+      <h1 className="faq-heading">{blog.title}</h1>
+      <img src={blog.image} className="blog-img" alt={blog.title} />
+      <p>{blog.content}</p>
+      <p className="hashtags">{blog.hashtags}</p>
+    </section>
   );
 }
 
@@ -126,85 +202,6 @@ function FAQ() {
           Sie können Ihren Möbeltransport ganz einfach über unsere Website, per
           Telefon oder per E-Mail buchen.
         </p>
-      </div>
-    </section>
-  );
-}
-
-function Blog() {
-  return (
-    <section className="section blog-section" id="blog">
-      <h1 className="faq-heading">Blog & Neuigkeiten</h1>
-      <div className="blog-row">
-        <img src="/image11.png" className="blog-img" alt="Privatumzug" />
-        <div className="blog-text">
-          <h2 className="blog-title">
-            👉 Privatumzüge in Deutschland: Stressfrei, günstig und professionell
-            umziehen
-          </h2>
-          <p>
-            Ein Wohnungswechsel ist oft mit Stress und viel Organisation
-            verbunden. Mit einem professionellen Umzugsunternehmen wird der
-            Umzug jedoch deutlich einfacher und sicherer. Bei einem Privatumzug
-            stehen vor allem die sorgfältige Verpackung, pünktliche Lieferung
-            und ein zuverlässiger Versicherungsschutz im Vordergrund. Ob
-            innerhalb einer Stadt oder deutschlandweit – unsere erfahrenen Teams
-            sorgen dafür, dass Ihr Umzug reibungslos und stressfrei verläuft.
-            Vertrauen Sie auf unsere Expertise und genießen Sie einen entspannten
-            Neuanfang.
-          </p>
-          <p>
-            #Privatumzug Deutschland, Umzug stressfrei, günstige Umzugsfirma,
-            professioneller Umzug
-          </p>
-        </div>
-      </div>
-      <div className="blog-row reverse">
-        <img src="/image22.png" className="blog-img" alt="Firmenumzug" />
-        <div className="blog-text">
-          <h2 className="blog-title">
-            👉 Firmenumzüge leicht gemacht: Effizient und ohne Arbeitsausfall
-            umziehen
-          </h2>
-          <p>
-            Ein Firmenumzug bedeutet mehr als nur Möbel zu transportieren – er
-            beeinflusst den gesamten Geschäftsablauf. Deshalb ist eine präzise
-            Planung entscheidend, damit der Betrieb ohne Unterbrechung
-            weiterläuft. Büroeinrichtungen, Computer, sensible Daten und
-            technische Geräte müssen mit besonderer Sorgfalt transportiert
-            werden. Wir bieten Unternehmen maßgeschneiderte Lösungen, um einen
-            schnellen, sicheren und effizienten Umzug zu garantieren. Mit unserem
-            professionellen Team minimieren Sie Ausfallzeiten und können sich
-            voll auf Ihr Geschäft konzentrieren.
-          </p>
-          <p>
-            #Firmenumzug Deutschland, Büro umziehen, Umzugsservice für
-            Unternehmen, professioneller Büroumzug
-          </p>
-        </div>
-      </div>
-      <div className="blog-row">
-        <img src="/image33.png" className="blog-img" alt="Express Transporte" />
-        <div className="blog-text">
-          <h2 className="blog-title">
-            👉 Express-Transporte in Deutschland: Schnell, sicher und zuverlässig
-            liefern
-          </h2>
-          <p>
-            Manchmal zählt jede Minute – ob wichtige Dokumente, Messeausstattung
-            oder dringende Warenlieferungen. In solchen Fällen sind
-            Express-Transporte die beste Lösung. Unser Service garantiert
-            schnelle, flexible und sichere Lieferungen in ganz Deutschland. Dank
-            moderner Fahrzeuge und einem 24/7-Kundenservice stellen wir sicher,
-            dass Ihre Sendung pünktlich und unversehrt ankommt. Wenn es wirklich
-            eilig ist, können Sie sich auf unsere Erfahrung und Zuverlässigkeit
-            verlassen.
-          </p>
-          <p>
-            #Express Transport Deutschland, schnelle Lieferung, zuverlässiger
-            Transport, 24h Express-Umzug
-          </p>
-        </div>
       </div>
     </section>
   );
