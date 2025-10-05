@@ -288,3 +288,20 @@ body, html, .app {
 
 .review-content h3 { margin-bottom: 0.5rem; }
 
+/* Mobil uyum - Über Uns için */
+@media (max-width: 768px) {
+  .about-section .services-grid {
+    grid-template-columns: 1fr !important; /* Mobilde tek kolon */
+    padding: 0 1rem;
+  }
+
+  .service-card {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .services-heading {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
