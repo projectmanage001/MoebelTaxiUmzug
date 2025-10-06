@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useParams, useNavigate } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 import "./App.css";
 
 // Blog verileri
@@ -53,6 +54,7 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/referenzen" element={<References />} />
           <Route path="/kontakt" element={<Contact />} />
+          <Route path="/datenschutzerklaerung" element={<PrivacyPolicy />} />
         </Routes>
         <Footer />
       </div>
@@ -83,10 +85,8 @@ function Header() {
   );
 }
 
-// Home page
-function Home() {
-  return <Hero />;
-}
+// Home
+function Home() { return <Hero />; }
 
 function Hero() {
   return (
@@ -103,14 +103,10 @@ function Hero() {
       <div className="hero-overlay">
         <h1>MöbelTaxi Umzug</h1>
         <p>Ihr Logistik- und Umzugspartner</p>
-        <Link to="/kontakt" className="cta-button">
-          Jetzt Kontakt Aufnehmen
-        </Link>
+        <Link to="/kontakt" className="cta-button">Jetzt Kontakt Aufnehmen</Link>
         <p className="phone-display">
-          <a href="tel:+4915771677034" style={{color:"#fff", textDecoration:"none", fontSize:"1.2rem", fontWeight:"bold"}}>
-            📞
-            <span style={{animation: "blink 1s infinite", color:"#ffd32a", marginLeft:"0.5rem"}}>📱</span>
-            +49 1577 1677034
+          <a href="tel:+4915771677034" style={{ color: "#fff", textDecoration: "none", fontSize: "1.2rem", fontWeight: "bold" }}>
+            📞 +49 1577 1677034
           </a>
         </p>
       </div>
@@ -118,7 +114,26 @@ function Hero() {
   );
 }
 
-// Dienstleistungen sayfası
+// Über Uns
+function AboutUs() {
+  return (
+    <section className="section about-section">
+      <h1 className="services-heading">Über Uns / Warum wir?</h1>
+      <div className="services-grid">
+        <div className="service-card fade-in">✅ Schnell, zuverlässig & preiswert</div>
+        <div className="service-card fade-in">✅ Flexible Termine – auch kurzfristig möglich</div>
+        <div className="service-card fade-in">✅ Freundlicher Service & tatkräftiges Team</div>
+        <div className="service-card fade-in">✅ Transporte mit eigenen Fahrzeugen in ganz Berlin</div>
+        <div className="service-card fade-in">✅ Individuelle Beratung & maßgeschneiderte Angebote</div>
+        <div className="service-card fade-in">✅ Pünktlichkeit und Transparenz bei allen Aufträgen</div>
+        <div className="service-card fade-in">✅ Nachhaltige Lösungen – umweltfreundliche Materialien & Fahrzeuge</div>
+        <div className="service-card fade-in">✅ Kundenzufriedenheit steht bei uns an erster Stelle</div>
+      </div>
+    </section>
+  );
+}
+
+// Dienstleistungen
 function ServicesPage() {
   return (
     <section className="section services-section">
@@ -142,16 +157,14 @@ function ServicesPage() {
   );
 }
 
-// FAQ sayfası
+// FAQ
 function FAQPage() {
   return (
     <section className="section faq-section">
       <h1 className="faq-heading">Häufig gestellte Fragen</h1>
       <div className="faq-item fade-in">
         <h2>1. Was für Transportdienstleistungen bietet Ihr Unternehmen an?</h2>
-        <p>MöbelTaxi bietet eine Vielzahl von Transportdienstleistungen in Berlin an, einschließlich Möbeltransporte, Büroumzüge, Transport und Entsorgung von Sperrgut.
-Was kostet ein Möbeltransport mit MöbelTaxi in Berlin?
-Die Kosten werden individuell pro Auftrag berechnet. Nach Ihrer Anfrage erhalten Sie umgehend ein individuelles Angebot.</p>
+        <p>MöbelTaxi bietet eine Vielzahl von Transportdienstleistungen in Berlin an, einschließlich Möbeltransporte, Büroumzüge, Transport und Entsorgung von Sperrgut.</p>
       </div>
       <div className="faq-item fade-in">
         <h2>2. Wie wird der Transportpreis berechnet?</h2>
@@ -165,26 +178,7 @@ Die Kosten werden individuell pro Auftrag berechnet. Nach Ihrer Anfrage erhalten
   );
 }
 
-// Über Uns sayfası
-function AboutUs() {
-  return (
-    <section className="section about-section">
-      <h1 className="services-heading">Über Uns / Warum wir?</h1>
-      <div className="services-grid">
-        <div className="service-card fade-in">✅ Schnell, zuverlässig & preiswert</div>
-        <div className="service-card fade-in">✅ Flexible Termine – auch kurzfristig möglich</div>
-        <div className="service-card fade-in">✅ Freundlicher Service & tatkräftiges Team</div>
-        <div className="service-card fade-in">✅ Transporte mit eigenen Fahrzeugen in ganz Berlin</div>
-        <div className="service-card fade-in">✅ Individuelle Beratung & maßgeschneiderte Angebote</div>
-        <div className="service-card fade-in">✅ Pünktlichkeit und Transparenz bei allen Aufträgen</div>
-        <div className="service-card fade-in">✅ Nachhaltige Lösungen – umweltfreundliche Materialien & Fahrzeuge</div>
-        <div className="service-card fade-in">✅ Kundenzufriedenheit steht bei uns an erster Stelle</div>
-      </div>
-    </section>
-  );
-}
-
-// Blog liste sayfası
+// Blog Liste
 function Blog() {
   return (
     <section className="section blog-section">
@@ -202,7 +196,24 @@ function Blog() {
   );
 }
 
-// Referenzen sayfası
+// Blog Detay
+function BlogDetail() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const blog = blogPosts.find((b) => b.id === parseInt(id));
+  if (!blog) return <p>Blog nicht gefunden</p>;
+  return (
+    <section className="section blog-detail-section">
+      <button className="back-button" onClick={() => navigate("/blog")}>← Zurück</button>
+      <h1 className="faq-heading">{blog.title}</h1>
+      <img src={blog.image} className="blog-img" alt={blog.title} />
+      <p>{blog.content}</p>
+      <p className="hashtags">{blog.hashtags}</p>
+    </section>
+  );
+}
+
+// Referenzen
 function References() {
   return (
     <section className="section references-section">
@@ -222,55 +233,369 @@ function References() {
   );
 }
 
-// Blog detay sayfası
-function BlogDetail() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const blog = blogPosts.find((b) => b.id === parseInt(id));
-  if (!blog) return <p>Blog nicht gefunden</p>;
-  return (
-    <section className="section blog-detail-section">
-      <button className="back-button" onClick={() => navigate("/blog")}>
-        ← Zurück zur Übersicht
-      </button>
-      <h1 className="faq-heading">{blog.title}</h1>
-      <img src={blog.image} className="blog-img" alt={blog.title} />
-      <p>{blog.content}</p>
-      <p className="hashtags">{blog.hashtags}</p>
-    </section>
-  );
-}
-
-// Kontakt sayfası
+// ✉️ K O N T A K T  (EmailJS + Form + Tıklanabilir Adres / Mail / Telefon / WhatsApp)
 function Contact() {
+  const form = useRef();
+  const [sent, setSent] = useState(false);
+  const [checked, setChecked] = useState(false);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    if (!checked) {
+      alert("Bitte bestätigen Sie die Datenschutzerklärung.");
+      return;
+    }
+    emailjs
+      .sendForm(
+        "service_m5e9zfv",
+        "template_fk75mjp",
+        form.current,
+        "m8spZLGqXBIEqNGr0"
+      )
+      .then(() => {
+        setSent(true);
+        form.current.reset();
+        setChecked(false);
+      })
+      .catch(() => alert("Fehler beim Senden."));
+  };
+
   return (
-    <section className="section">
-      <h1>Kontakt & Standort</h1>
+    <section className="section contact-section">
+      <h1>Kontakt</h1>
+
+      {/* 📍 Adres ve Sosyal Bilgiler */}
       <div className="contact-info">
-        <p><strong>📍 Adresse:</strong> Zeppelinstraße 75, 13583 Berlin</p>
-        <p><strong>📧 E-Mail:</strong> <a href="mailto:moebeltaxiumzug@gmail.com">moebeltaxiumzug@gmail.com</a></p>
-        <p><strong>📞 Telefon/ Whatsapp:</strong> <a href="tel:+4915771677034">+49 1577 1677034</a></p>
-        <p><strong>📷 Instagram:</strong> <a href="https://instagram.com/mobeltaxiumzug" target="_blank" rel="noreferrer">@mobeltaxiumzug</a></p>
+        <p>
+          📍 <strong>Adresse:</strong>{" "}
+          <a
+            href="https://maps.google.com/?q=Zeppelinstraße+75,+13583+Berlin"
+            target="_blank"
+            rel="noreferrer"
+            className="map-link"
+          >
+            Zeppelinstraße 75, 13583 Berlin
+          </a>
+        </p>
+        <p>
+          📧 <strong>E-Mail:</strong>{" "}
+          <a href="mailto:moebeltaxiumzug@gmail.com" className="mail-link">
+            moebeltaxiumzug@gmail.com
+          </a>
+        </p>
+        <p>
+          📞 <strong>Telefon:</strong>{" "}
+          <a href="tel:+4915771677034" className="phone-link">
+            +49 1577 1677034
+          </a>
+        </p>
+        <p>
+          💬 <strong>WhatsApp:</strong>{" "}
+          <a
+            href="https://wa.me/4915771677034"
+            target="_blank"
+            rel="noreferrer"
+            className="whatsapp-link"
+          >
+            Jetzt über WhatsApp schreiben
+          </a>
+        </p>
+        <p>
+          📷 <strong>Instagram:</strong>{" "}
+          <a
+            href="https://www.instagram.com/mobeltaxiumzug"
+            target="_blank"
+            rel="noreferrer"
+          >
+            @mobeltaxiumzug
+          </a>
+        </p>
       </div>
-      <div style={{ height: "2rem" }}></div>
+
+      {/* 🗺️ Canlı Google Haritası */}
       <div className="map-container">
         <iframe
-          title="Google Maps Location"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2429.5807414939085!2d13.191869376477303!3d52.55013347200782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a851db189e411d%3A0x85b3c1ea83fe33a9!2sZeppelinstra%C3%9Fe%2075%2C%2013583%20Berlin%2C%20Germany!5e0!3m2!1str!2str!4v1696069698439!5m2!1str!2str"
-          width="100%" height="400" style={{ border: 0 }} allowFullScreen="" loading="lazy"
+          title="MöbelTaxi Umzug Berlin Standort"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2428.895904438589!2d13.184738577094033!3d52.53743827203902!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a85d8c7d7b3ddf%3A0x1d4e5de3e7e35b9!2sZeppelinstra%C3%9Fe%2075%2C%2013583%20Berlin%2C%20Almanya!5e0!3m2!1str!2str!4v1728307899827!5m2!1str!2str"
+          width="100%"
+          height="400"
+          style={{
+            border: 0,
+            borderRadius: "10px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
+          }}
+          allowFullScreen=""
+          loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
+
+      {/* 📬 İletişim Formu */}
+      <h2 style={{ marginTop: "2rem" }}>Kontaktformular</h2>
+      <form ref={form} onSubmit={sendEmail} className="contact-form">
+        <label>Vorname<input type="text" name="vorname" required /></label>
+        <label>Nachname<input type="text" name="nachname" required /></label>
+        <label>E-Mail *<input type="email" name="email" required /></label>
+        <label>Telefonnummer *<input type="tel" name="telefonnummer" required /></label>
+        <p>Wenn Sie einen Rückruf wünschen, bitte ausfüllen.</p>
+        <label>Bitte wählen Sie eine Option *
+          <select name="dienstleistung" required>
+            <option value="">-- Bitte wählen --</option>
+            <option>Umzüge</option><option>Möbeltransporte</option>
+            <option>Entrümpelung</option><option>Montage</option>
+            <option>Gartenarbeiten</option><option>Lieferung</option>
+          </select>
+        </label>
+        <label>Wie viele Träger benötigen Sie? *<input type="number" name="traeger" required /></label>
+        <label>Menge der Güter *<textarea name="menge" required></textarea></label>
+        <label>Von welchem Stockwerk abholen? *<input type="text" name="abholstock" required /></label>
+        <label>In welches Stockwerk liefern? *<input type="text" name="lieferstock" required /></label>
+        <label>Gibt es einen Aufzug im Gebäude? *
+          <select name="aufzug" required>
+            <option value="">-- Bitte wählen --</option>
+            <option>Ja</option><option>Nein</option>
+          </select>
+        </label>
+        <label>Abholadresse *<textarea name="abholadresse" required></textarea></label>
+        <label>Lieferadresse *<textarea name="lieferadresse" required></textarea></label>
+        <label>Kommentar oder Nachricht *<textarea name="nachricht" required></textarea></label>
+
+        <label className="checkbox-label highlighted-checkbox">
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={() => setChecked(!checked)}
+            required
+          />
+          Ich habe die{" "}
+          <a
+            href="/datenschutzerklaerung"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Datenschutzerklärung
+          </a>{" "}
+          gelesen und stimme zu.
+        </label>
+
+        <button type="submit" className="cta-button">Absenden</button>
+        {sent && (
+          <p style={{ color: "green" }}>
+            Nachricht erfolgreich gesendet ✅
+          </p>
+        )}
+      </form>
     </section>
   );
 }
 
+// Footer
 function Footer() {
   return (
     <footer className="footer">
       <img src="/logo.png" alt="MöbelTaxi Logo Footer" className="footer-logo" />
       <p>&copy; 2025 MöbelTaxi Umzug. Alle Rechte vorbehalten.</p>
     </footer>
+  );
+}
+
+function PrivacyPolicy() {
+  return (
+    <section className="section privacy-section">
+      <h1>Datenschutzerklärung</h1>
+
+      <p>
+        Wir freuen uns sehr über Ihr Interesse an unserem Unternehmen.
+        Datenschutz hat einen besonders hohen Stellenwert für die
+        Geschäftsleitung von <strong>MöbelTaxi Umzug Berlin</strong>. Eine
+        Nutzung der Internetseiten von MöbelTaxi Umzug Berlin ist grundsätzlich
+        ohne jede Angabe personenbezogener Daten möglich. Sofern eine betroffene
+        Person besondere Services unseres Unternehmens über unsere Internetseite
+        in Anspruch nehmen möchte, könnte jedoch eine Verarbeitung
+        personenbezogener Daten erforderlich werden.
+      </p>
+
+      <p>
+        Ist die Verarbeitung personenbezogener Daten erforderlich und besteht
+        für eine solche Verarbeitung keine gesetzliche Grundlage, holen wir
+        generell eine Einwilligung der betroffenen Person ein. Die Verarbeitung
+        personenbezogener Daten, beispielsweise des Namens, der Anschrift,
+        E-Mail-Adresse oder Telefonnummer einer betroffenen Person, erfolgt
+        stets im Einklang mit der Datenschutz-Grundverordnung (DS-GVO) und in
+        Übereinstimmung mit den für MöbelTaxi Umzug Berlin geltenden
+        landesspezifischen Datenschutzbestimmungen.
+      </p>
+
+      <p>
+        Mittels dieser Datenschutzerklärung möchte unser Unternehmen die
+        Öffentlichkeit über Art, Umfang und Zweck der von uns erhobenen,
+        genutzten und verarbeiteten personenbezogenen Daten informieren. Ferner
+        werden betroffene Personen mittels dieser Datenschutzerklärung über die
+        ihnen zustehenden Rechte aufgeklärt.
+      </p>
+
+      <h2>1. Begriffsbestimmungen</h2>
+      <p>
+        Die Datenschutzerklärung von MöbelTaxi Umzug Berlin beruht auf den
+        Begrifflichkeiten, die durch den Europäischen Richtlinien- und
+        Verordnungsgeber beim Erlass der Datenschutz-Grundverordnung (DS-GVO)
+        verwendet wurden. Unsere Datenschutzerklärung soll sowohl für die
+        Öffentlichkeit als auch für unsere Kunden und Geschäftspartner einfach
+        lesbar und verständlich sein. Um dies zu gewährleisten, möchten wir
+        vorab die verwendeten Begrifflichkeiten erläutern:
+      </p>
+      <ul>
+        <li>
+          <strong>a) personenbezogene Daten:</strong> Alle Informationen, die
+          sich auf eine identifizierte oder identifizierbare natürliche Person
+          beziehen.
+        </li>
+        <li>
+          <strong>b) betroffene Person:</strong> Jede identifizierte oder
+          identifizierbare natürliche Person, deren personenbezogene Daten
+          verarbeitet werden.
+        </li>
+        <li>
+          <strong>c) Verarbeitung:</strong> Jeder mit oder ohne Hilfe
+          automatisierter Verfahren ausgeführte Vorgang im Zusammenhang mit
+          personenbezogenen Daten.
+        </li>
+        <li>
+          <strong>d) Verantwortlicher:</strong> Die natürliche oder juristische
+          Person, Behörde, Einrichtung oder andere Stelle, die allein oder
+          gemeinsam über die Zwecke und Mittel der Verarbeitung entscheidet.
+        </li>
+      </ul>
+
+      <h2>2. Name und Anschrift des Verantwortlichen</h2>
+      <p>
+        <strong>MöbelTaxi Umzug Berlin</strong>
+        <br />
+        Zeppelinstraße 75<br />
+        13583 Berlin<br />
+        E-Mail: moebeltaxiumzug@gmail.com<br />
+        Telefon: +49 1577 1677034
+      </p>
+
+      <h2>3. Erfassung von allgemeinen Daten und Informationen</h2>
+      <p>
+        Die Internetseite von MöbelTaxi Umzug Berlin erfasst mit jedem Aufruf
+        durch eine betroffene Person oder ein automatisiertes System eine Reihe
+        von allgemeinen Daten und Informationen. Diese allgemeinen Daten und
+        Informationen werden in den Logfiles des Servers gespeichert. Erfasst
+        werden können:
+      </p>
+      <ul>
+        <li>Browsertyp und Version</li>
+        <li>verwendetes Betriebssystem</li>
+        <li>Internetseite, von der der Zugriff erfolgt (Referrer)</li>
+        <li>Datum und Uhrzeit des Zugriffs</li>
+        <li>IP-Adresse</li>
+        <li>Internet-Service-Provider des zugreifenden Systems</li>
+      </ul>
+      <p>
+        Bei der Nutzung dieser allgemeinen Daten zieht MöbelTaxi Umzug Berlin
+        keine Rückschlüsse auf die betroffene Person. Diese Informationen werden
+        benötigt, um die Inhalte korrekt auszuliefern, die Funktionsfähigkeit zu
+        gewährleisten und im Falle von Angriffen Strafverfolgungsbehörden die
+        erforderlichen Informationen bereitzustellen.
+      </p>
+
+      <h2>4. Kontaktmöglichkeit über die Internetseite</h2>
+      <p>
+        Die Internetseite von MöbelTaxi Umzug Berlin enthält Angaben, die eine
+        schnelle elektronische Kontaktaufnahme sowie eine unmittelbare
+        Kommunikation mit uns ermöglichen. Sofern eine betroffene Person per
+        E-Mail oder über ein Kontaktformular den Kontakt mit uns aufnimmt,
+        werden die übermittelten personenbezogenen Daten automatisch gespeichert.
+      </p>
+      <p>
+        Solche auf freiwilliger Basis übermittelten Daten werden zum Zwecke der
+        Bearbeitung oder Kontaktaufnahme gespeichert. Eine Weitergabe dieser
+        personenbezogenen Daten an Dritte erfolgt nicht.
+      </p>
+
+      <h2>5. Routinemäßige Löschung und Sperrung von personenbezogenen Daten</h2>
+      <p>
+        MöbelTaxi Umzug Berlin verarbeitet und speichert personenbezogene Daten
+        nur für den Zeitraum, der zur Erreichung des Speicherungszwecks
+        erforderlich ist, oder sofern dies durch Gesetze oder Vorschriften
+        vorgesehen wurde. Nach Ablauf der Frist werden die entsprechenden Daten
+        routinemäßig gelöscht, sofern sie nicht mehr zur Vertragserfüllung oder
+        Vertragsanbahnung erforderlich sind.
+      </p>
+
+      <h2>6. Rechte der betroffenen Person</h2>
+      <ul>
+        <li>Recht auf Auskunft über gespeicherte Daten</li>
+        <li>Recht auf Berichtigung unrichtiger Daten</li>
+        <li>Recht auf Löschung („Recht auf Vergessenwerden“)</li>
+        <li>Recht auf Einschränkung der Verarbeitung</li>
+        <li>Recht auf Datenübertragbarkeit</li>
+        <li>Recht auf Widerspruch gegen die Verarbeitung</li>
+      </ul>
+      <p>
+        Zur Geltendmachung dieser Rechte kann sich die betroffene Person
+        jederzeit an uns wenden.
+      </p>
+
+      <h2>7. Datenschutzbestimmungen zu Einsatz und Verwendung von Google Maps</h2>
+      <p>
+        Auf dieser Webseite wird Google Maps API verwendet, um geographische
+        Informationen visuell darzustellen. Bei der Nutzung von Google Maps
+        werden von Google Daten über die Nutzung der Kartenfunktionen durch
+        Besucher erhoben, verarbeitet und genutzt. Nähere Informationen über die
+        Datenverarbeitung durch Google können den Datenschutzhinweisen von
+        Google entnommen werden:{" "}
+        <a
+          href="https://www.google.com/intl/de_de/help/terms_maps.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          https://www.google.com/intl/de_de/help/terms_maps.html
+        </a>
+      </p>
+
+      <h2>8. Rechtsgrundlage der Verarbeitung</h2>
+      <p>
+        Art. 6 Abs. 1 lit. a DS-GVO dient MöbelTaxi Umzug Berlin als
+        Rechtsgrundlage für Verarbeitungsvorgänge, bei denen eine Einwilligung
+        eingeholt wird. Ist die Verarbeitung zur Erfüllung eines Vertrags
+        erforderlich, basiert sie auf Art. 6 Abs. 1 lit. b DS-GVO.
+      </p>
+
+      <h2>9. Dauer der Speicherung personenbezogener Daten</h2>
+      <p>
+        Das Kriterium für die Dauer der Speicherung personenbezogener Daten ist
+        die jeweilige gesetzliche Aufbewahrungsfrist. Nach Ablauf dieser Frist
+        werden die entsprechenden Daten gelöscht, sofern sie nicht mehr zur
+        Vertragserfüllung erforderlich sind.
+      </p>
+
+      <h2>10. Sicherheit der Verarbeitung</h2>
+      <p>
+        MöbelTaxi Umzug Berlin hat technische und organisatorische Maßnahmen
+        getroffen, um einen möglichst lückenlosen Schutz der über diese
+        Internetseite verarbeiteten personenbezogenen Daten sicherzustellen.
+        Dennoch können internetbasierte Datenübertragungen grundsätzlich
+        Sicherheitslücken aufweisen, sodass ein absoluter Schutz nicht
+        gewährleistet werden kann.
+      </p>
+
+      <h2>11. Änderungen dieser Datenschutzerklärung</h2>
+      <p>
+        MöbelTaxi Umzug Berlin behält sich vor, diese Datenschutzerklärung bei
+        Bedarf anzupassen, um sie stets den aktuellen rechtlichen Anforderungen
+        oder Änderungen unserer Dienstleistungen anzupassen. Für Ihren erneuten
+        Besuch gilt dann die neue Datenschutzerklärung.
+      </p>
+
+      <p>
+        <strong>Stand:</strong> Oktober 2025 <br />
+        <strong>Verantwortlich:</strong> MöbelTaxi Umzug Berlin, Zeppelinstraße
+        75, 13583 Berlin
+      </p>
+    </section>
   );
 }
 
