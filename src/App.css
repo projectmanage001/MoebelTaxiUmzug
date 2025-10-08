@@ -177,19 +177,85 @@ body, html, .app {
   margin-top: 1rem;
 }
 
-/* Footer */
+/* === FOOTER === */
 .footer {
   background-color: #1e272e;
   color: white;
   text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
-  margin-top: auto;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer-section {
+  max-width: 600px;
+  text-align: center;
 }
 
 .footer-logo {
-  height: 40px;
+  height: 60px;
   margin-bottom: 0.5rem;
+}
+
+.footer-heading {
+  font-size: 1.4rem;
+  color: #ffd32a;
+  margin-bottom: 0.8rem;
+}
+
+.footer-text {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.footer-button {
+  background-color: #ffd32a;
+  color: #000;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.footer-button:hover {
+  background-color: #fbc531;
+}
+
+.footer-link {
+  color: #ffd32a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  padding-top: 1rem;
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+/* Mobil görünüm */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2rem 1rem;
+  }
+
+  .footer-heading {
+    font-size: 1.2rem;
+  }
+
+  .footer-text {
+    font-size: 0.95rem;
+  }
 }
 
 /* CTA */
@@ -413,3 +479,57 @@ body, html, .app {
   transform: scale(1.6);
   margin-right: 10px;
   }
+
+/* === Sticky Top Bar === */
+.sticky-bar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #ffd32a;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 9999;
+  padding: 0.5rem 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.sticky-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.sticky-btn {
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 700;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.call-btn { background-color: #1e272e; }
+.call-btn:hover { background-color: #2f3640; }
+
+.form-btn { background-color: #000; }
+.form-btn:hover { background-color: #333; }
+
+.whatsapp-btn { background-color: #25d366; }
+.whatsapp-btn:hover { background-color: #1ebe5b; }
+
+@media (max-width: 768px) {
+  .sticky-bar {
+    font-size: 0.85rem;
+    padding: 0.4rem;
+  }
+  .sticky-item {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}

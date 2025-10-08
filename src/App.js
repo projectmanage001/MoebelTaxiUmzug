@@ -44,6 +44,7 @@ function App() {
   return (
     <Router>
       <div className="app">
+         <StickyBar />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -59,6 +60,98 @@ function App() {
         <Footer />
       </div>
     </Router>
+  );
+}
+
+/* === 🧩 STICKY BAR === */
+function StickyBar() {
+  return (
+    <div className="sticky-bar">
+      {/* Sol Kısım - Telefon ve Form */}
+      <div className="sticky-item">
+        <span>📞 Click & Call | Mo–Fr 9–18 Uhr</span>
+        <a href="tel:+4915771677034" className="sticky-btn call-btn">
+          +49 1577 1677034
+        </a>
+        <Link to="/kontakt" className="sticky-btn form-btn">
+          Zum Anfrageformular
+        </Link>
+      </div>
+
+      {/* Orta Kısım - WhatsApp */}
+      <div className="sticky-item">
+        <span>💬 Click & Chat | WhatsApp 24/7</span>
+        <a
+          href="https://wa.me/4915771677034"
+          target="_blank"
+          rel="noreferrer"
+          className="sticky-btn whatsapp-btn"
+        >
+          WhatsApp
+        </a>
+      </div>
+
+      {/* Sağ Kısım - Sosyal İkonlar */}
+      <div className="sticky-socials">
+        {/* Gmail */}
+        <a
+          href="mailto:moebeltaxiumzug@gmail.com"
+          title="E-Mail senden"
+          className="social-icon"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            style={{ color: "#EA4335" }}
+          >
+            <path d="M12 13.5l8-6V18H4V7.5l8 6zm0-3L4 6h16l-8 4.5z" />
+          </svg>
+        </a>
+
+        {/* Instagram */}
+        <a
+          href="https://www.instagram.com/mobeltaxiumzug"
+          target="_blank"
+          rel="noreferrer"
+          title="Instagram"
+          className="social-icon"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            style={{ color: "#E1306C" }}
+          >
+            <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/>
+          </svg>
+        </a>
+
+        {/* Facebook */}
+        <a
+          href="https://www.facebook.com/share/1CXApsKjjC/?mibextid=wwXIfr"
+          target="_blank"
+          rel="noreferrer"
+          title="Facebook"
+          className="social-icon"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            style={{ color: "#1877F2" }}
+          >
+            <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5.01 3.66 9.17 8.44 9.93v-7.02H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.62.77-1.62 1.56v1.87h2.76l-.44 2.9h-2.32V22c4.78-.76 8.44-4.92 8.44-9.93z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
   );
 }
 
@@ -474,14 +567,119 @@ function Contact() {
 }
 
 // Footer
+// Footer
 function Footer() {
   return (
     <footer className="footer">
-      <img src="/logo.png" alt="MöbelTaxi Logo Footer" className="footer-logo" />
-      <p>&copy; 2025 MöbelTaxi Umzug. Alle Rechte vorbehalten.</p>
+      {/* 1️⃣ Logo */}
+      <div className="footer-section footer-logo-area">
+        <img
+          src="/logo.png"
+          alt="MöbelTaxi Logo Footer"
+          className="footer-logo"
+        />
+
+        {/* 🔗 Sosyal ikonlar (Instagram & Facebook) */}
+        <div
+          className="footer-social"
+          style={{
+            display: "flex",
+            gap: "14px",
+            marginTop: "10px",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          {/* Instagram */}
+          <a
+            href="https://www.instagram.com/mobeltaxiumzug"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+            title="Instagram"
+            style={{ display: "inline-flex" }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              style={{ color: "#E1306C" }}
+            >
+              <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/>
+            </svg>
+          </a>
+
+          {/* Facebook */}
+          <a
+            href="https://www.facebook.com/share/1CXApsKjjC/?mibextid=wwXIfr"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Facebook"
+            title="Facebook"
+            style={{ display: "inline-flex" }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              style={{ color: "#1877F2" }}
+            >
+              <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 5.01 3.66 9.17 8.44 9.93v-7.02H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.62.77-1.62 1.56v1.87h2.76l-.44 2.9h-2.32V22c4.78-.76 8.44-4.92 8.44-9.93z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      {/* 2️⃣ Fragen Sie Uns */}
+      <div className="footer-section footer-contact-invite">
+        <h2 className="footer-heading">FRAGEN SIE UNS</h2>
+        <p className="footer-text">
+          Setzen Sie sich mit uns in Verbindung! Füllen Sie das Anfrageformular aus und lassen Sie sich ein individuelles und unverbindliches Angebot zukommen.
+        </p>
+        
+      </div>
+
+      {/* 3️⃣ Kontaktbilgiler */}
+      <div className="footer-section footer-contact-info">
+        <h2 className="footer-heading">KONTAKT</h2>
+        <p><strong>Büro- & Sprechzeiten:</strong><br/>
+        Mo. – Fr.: 8:00 – 22:00 Uhr<br/>
+        Sa.: 9:00 – 20:00 Uhr</p>
+
+        <p>
+          📞 <strong>Telefon:</strong>{" "}
+          <a href="tel:+4915771677034" className="footer-link">
+            +49 1577 1677034
+          </a>
+        </p>
+
+        <p>
+          💬 <strong>WhatsApp:</strong>{" "}
+          <a
+            href="https://wa.me/4915771677034"
+            target="_blank"
+            rel="noreferrer"
+            className="footer-link"
+          >
+            MöbelTaxi Whatsapp – Click & Chat (24/7)
+          </a>
+        </p>
+
+        <p>🕒 <strong>24/7 Terminvergabe</strong></p>
+      </div>
+
+      {/* Telif hakkı */}
+      <div className="footer-bottom">
+        <p>&copy; 2025 MöbelTaxi Umzug. Alle Rechte vorbehalten.</p>
+      </div>
     </footer>
   );
 }
+
 
 function PrivacyPolicy() {
   return (
