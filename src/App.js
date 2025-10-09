@@ -46,7 +46,7 @@ function App() {
       <div
         className="app"
         style={{
-          backgroundImage: "url('/arkaplan.jpg')",
+          
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundAttachment: "fixed",
