@@ -195,7 +195,7 @@ body, html, .app {
 }
 
 .footer-logo {
-  height: 60px;
+  height: 300px;
   margin-bottom: 0.5rem;
 }
 
@@ -286,7 +286,7 @@ body, html, .app {
 /* Hamburger menu */
 .hamburger {
   display: none;
-  font-size: 2rem;
+  font-size: 1.7rem;
   cursor: pointer;
 }
 
@@ -316,12 +316,12 @@ body, html, .app {
 }
 
 .logo-img {
-  height: 50px;
+  height: 70px;
   width: auto;
 }
 
 .logo-text {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: white;
 }

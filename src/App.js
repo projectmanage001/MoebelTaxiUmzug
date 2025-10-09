@@ -43,8 +43,17 @@ const reviews = [
 function App() {
   return (
     <Router>
-      <div className="app">
-         <StickyBar />
+      <div
+        className="app"
+        style={{
+          backgroundImage: "url('/arkaplan.jpg')",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundAttachment: "fixed",
+          backgroundPosition: "center"
+        }}
+      >
+        <StickyBar />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
